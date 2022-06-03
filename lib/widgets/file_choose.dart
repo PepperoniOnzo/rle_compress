@@ -10,7 +10,7 @@ class FileChoose extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(
-          25, MediaQuery.of(context).size.height * 0.05, 25, 30),
+          25, MediaQuery.of(context).size.height * 0.02, 25, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -21,27 +21,29 @@ class FileChoose extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  "Picked file",
-                  style: TextStyle(
-                    color: ColorsData.textAdditional,
-                  ),
-                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      child: Text(context.watch<ViewRLE>().pickedFile,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: ColorsData.textPrimary, fontSize: 15)),
+                    const Text(
+                      "Picked file",
+                      style: TextStyle(
+                        color: ColorsData.textAdditional,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                         ' ' +
-                            context.watch<ViewRLE>().sizeMb.toStringAsFixed(2) +
+                            context.watch<ViewRLE>().sizeMbBefore.toStringAsFixed(2) +
                             ' mb',
-                        style:
-                            TextStyle(color: ColorsData.textGold, fontSize: 15))
+                        style: const TextStyle(
+                            color: ColorsData.textGold, fontSize: 15))
                   ],
+                ),
+                Flexible(
+                  child: Text(context.watch<ViewRLE>().pickedFile,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: ColorsData.textPrimary, fontSize: 20)),
                 )
               ],
             ),
@@ -53,7 +55,7 @@ class FileChoose extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shadowColor: Colors.black,
                 elevation: 4.0,
-                primary: ColorsData.backgroundAdditional,
+                primary: ColorsData.backgroundSecondPrimary,
                 onPrimary: ColorsData.textPrimary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

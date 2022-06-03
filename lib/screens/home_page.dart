@@ -10,9 +10,9 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: const <Expanded>[
           Expanded(flex: 2, child: Center(child: FileChoose())),
-          Expanded(flex: 3, child: Center(child: Text('JUST 2'))),
-          Expanded(flex: 2, child: Center(child: Text('JUST 3'))),
-          Expanded(flex: 3, child: Center(child: Text('JUST 4'))),
+          Expanded(flex: 3, child: Center(child: MethodChoose())),
+          Expanded(flex: 2, child: Center(child: Stats())),
+          Expanded(flex: 5, child: Center(child: Text('JUST 4'))),
         ],
       ),
     );

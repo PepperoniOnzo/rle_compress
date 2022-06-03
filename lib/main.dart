@@ -7,10 +7,8 @@ import 'package:rle_compress/view/view_rle.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top]);
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
 
   runApp(MultiProvider(
     providers: [
