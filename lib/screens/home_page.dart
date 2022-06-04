@@ -9,10 +9,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: const <Expanded>[
-          Expanded(flex: 2, child: Center(child: FileChoose())),
-          Expanded(flex: 3, child: Center(child: MethodChoose())),
-          Expanded(flex: 2, child: Center(child: Stats())),
-          Expanded(flex: 5, child: Center(child: Text('JUST 4'))),
+          Expanded(flex: 4, child: Center(child: FileChoose())),
+          Expanded(flex: 5, child: Center(child: MethodChoose())),
+          Expanded(flex: 4, child: Center(child: Stats())),
+          Expanded(flex: 1, child: Center(child: ErrorTab())),
+          Expanded(flex: 8, child: Center(child: Text('JUST 4'))),
         ],
       ),
     );

@@ -16,16 +16,21 @@ class RightInfo extends StatelessWidget {
         children: <Widget>[
           Container(
             constraints: BoxConstraints(
-                minWidth: MediaQuery.of(context).size.width * 0.42),
+                minWidth: MediaQuery.of(context).size.width * 0.42,
+                maxWidth: MediaQuery.of(context).size.width * 0.42
+                ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(context.read<ViewRLE>().percent.toStringAsFixed(1) + ' %',
+                        maxLines: 1,
+
                     style: const TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                         color: ColorsData.textGold)),
+                        
                 const Text(
                   'Compression percent',
                   style: TextStyle(
@@ -43,7 +48,9 @@ class RightInfo extends StatelessWidget {
           ),
           Container(
             constraints: BoxConstraints(
-                minWidth: MediaQuery.of(context).size.width * 0.42),
+                minWidth: MediaQuery.of(context).size.width * 0.42,
+                maxWidth: MediaQuery.of(context).size.width * 0.42
+                ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +59,7 @@ class RightInfo extends StatelessWidget {
                     (context.read<ViewRLE>().sizeMbBefore -
                             context.read<ViewRLE>().sizeMbAfter)
                         .toStringAsFixed(2),
+                        maxLines: 1,
                     style: const TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,

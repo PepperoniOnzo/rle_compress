@@ -31,28 +31,60 @@ class _ActionWidgetState extends State<ActionWidget> {
                     );
                   }
                 })
-            : TextButton(
-                onPressed: () {
-                  setState(() {
-                    presed = true;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  shadowColor: Colors.black,
-                  elevation: 4.0,
-                  primary: ColorsData.backgroundSecondPrimary,
-                  onPrimary: ColorsData.textPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
+            : Container(
+                margin: EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              presed = true;
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.black,
+                            elevation: 4.0,
+                            primary: ColorsData.backgroundSecondPrimary,
+                            onPrimary: ColorsData.textPrimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          child: Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.05),
+                              child: const Text(
+                                'START RLE',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          )),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: TextButton(
+                          onPressed: () {
+                            context.read<ViewRLE>().changeDirectory();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.black,
+                            elevation: 4.0,
+                            primary: ColorsData.backgroundSecondPrimary,
+                            onPrimary: ColorsData.textPrimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          child: Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.05),
+                              child: const Icon(Icons.settings))),
+                    ),
+                  ],
                 ),
-                child: Container(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
-                  child: const Text(
-                    'START RLE',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                )));
+              ));
   }
 }
