@@ -11,6 +11,8 @@ class Stats extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
-        child: context.watch<ViewRLE>().ready ? ActionWidget() : RightInfo());
+        child: context.watch<ViewRLE>().ready
+            ? const ActionWidget()
+            : const RightInfo());
   }
 }

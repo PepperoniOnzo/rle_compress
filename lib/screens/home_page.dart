@@ -8,12 +8,27 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: const <Expanded>[
-          Expanded(flex: 4, child: Center(child: FileChoose())),
-          Expanded(flex: 5, child: Center(child: MethodChoose())),
-          Expanded(flex: 4, child: Center(child: Stats())),
-          Expanded(flex: 1, child: Center(child: ErrorTab())),
-          Expanded(flex: 8, child: Center(child: Text('JUST 4'))),
+        children: [
+          Container(
+              constraints: BoxConstraints.tightFor(
+                  height: MediaQuery.of(context).size.height * 0.15),
+              child: const Center(child: FileChoose())),
+          Container(
+              constraints: BoxConstraints.tightFor(
+                  height: MediaQuery.of(context).size.height * 0.25),
+              child: const Center(child: MethodChoose())),
+          Container(
+              constraints: BoxConstraints.tightFor(
+                  height: MediaQuery.of(context).size.height * 0.15),
+              child: const Center(child: Stats())),
+          Container(
+              constraints: BoxConstraints.tightFor(
+                  height: MediaQuery.of(context).size.height * 0.05),
+              child: const Center(child: ErrorTab())),
+          Container(
+              constraints: BoxConstraints.tightFor(
+                  height: MediaQuery.of(context).size.height * 0.4),
+              child: Center(child: History())),
         ],
       ),
     );

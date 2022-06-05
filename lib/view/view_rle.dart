@@ -2,22 +2,32 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:rle_compress/data/history_data.dart';
 import 'package:rle_compress/data/rle_compressor.dart';
 
 class ViewRLE extends ChangeNotifier {
   String pickedFile = 'example.bmp',
       outFilePath = '/storage/emulated/0/Download',
       errorStr = 'Something went wrong';
+
+  List<HistoryCardData> history = [];
+
   double sizeMbBefore = 0.00, sizeMbAfter = 0.00, percent = 0.0;
   bool _compress = true, ready = false, error = false;
   int bytesBefore = 0;
 
   Uint8List? fileBytes;
 
+  addElementToHistory(HistoryCardData data) {
+    history.insert(0, data);
+  }
+
   Future getFile() async {
+    await Permission.storage.request();
+
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (result != null) {
@@ -44,24 +54,37 @@ class ViewRLE extends ChangeNotifier {
 
   Future<void> readFileBytes() async {
     if (_compress) {
-      fileBytes = await compute(CompressionRLE.compression, fileBytes!);
+      if (pickedFile.split('.').last != 'rle') {
+        fileBytes = await compute(CompressionRLE.compression, fileBytes!);
+        error = false;
+      } else {
+        errorStr = "Can't compress RLE file";
+        error = true;
+      }
     } else {
       if (pickedFile.split('.').last == 'rle') {
         fileBytes = await compute(CompressionRLE.decompression, fileBytes!);
+        error = false;
       } else {
         errorStr = "Not RLE format";
-        fileBytes = Uint8List(0);
+        error = true;
       }
     }
   }
 
   Future<void> RLE() async {
-    await readFileBytes().whenComplete(() {
-      if (fileBytes != null && fileBytes!.isNotEmpty) {
+    readFileBytes().then((v) {
+      if (!error) {
         sizeMbAfter = fileBytes!.length / 1024 / 1024;
         percent = (bytesBefore - fileBytes!.length) / (bytesBefore / 100);
         error = false;
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+        addElementToHistory(HistoryCardData(
+            isCompressed: _compress,
+            percentage: percent,
+            mbSize: sizeMbBefore - sizeMbAfter,
+            fileName: pickedFile));
 
         if (_compress) {
           File(outFilePath + '/out_' + pickedFile.split('.').first + '.rle')
@@ -88,6 +111,8 @@ class ViewRLE extends ChangeNotifier {
 
   void changeCompress() {
     _compress = !_compress;
+    ready = true;
+    error = false;
     notifyListeners();
   }
 }

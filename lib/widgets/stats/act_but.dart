@@ -12,13 +12,15 @@ class ActionWidget extends StatefulWidget {
 
 class _ActionWidgetState extends State<ActionWidget> {
   bool presed = false;
+  late Future<void> future;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: presed
             ? FutureBuilder(
-                future: context.read<ViewRLE>().RLE(),
+                future: future,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Container();
@@ -40,6 +42,7 @@ class _ActionWidgetState extends State<ActionWidget> {
                       child: TextButton(
                           onPressed: () {
                             setState(() {
+                              future = context.read<ViewRLE>().RLE();
                               presed = true;
                             });
                           },

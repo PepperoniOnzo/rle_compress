@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/colors.dart';
+import '../../data/colors.dart';
 
 class CardTitle extends StatelessWidget {
   const CardTitle({Key? key, required this.title}) : super(key: key);
