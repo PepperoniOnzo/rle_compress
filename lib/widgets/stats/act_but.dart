@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rle_compress/data/colors.dart';
 import 'package:rle_compress/view/view_rle.dart';
+import 'package:rle_compress/widgets/stats/alert_dialog.dart';
 
 class ActionWidget extends StatefulWidget {
   const ActionWidget({Key? key}) : super(key: key);
@@ -11,8 +12,16 @@ class ActionWidget extends StatefulWidget {
 }
 
 class _ActionWidgetState extends State<ActionWidget> {
+  final myController = TextEditingController();
   bool presed = false;
   late Future<void> future;
+  String dropValue = 'BMP';
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class _ActionWidgetState extends State<ActionWidget> {
                   }
                 })
             : Container(
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -67,7 +76,7 @@ class _ActionWidgetState extends State<ActionWidget> {
                           )),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 10),
                       child: TextButton(
                           onPressed: () {
                             context.read<ViewRLE>().changeDirectory();
@@ -86,6 +95,38 @@ class _ActionWidgetState extends State<ActionWidget> {
                                   MediaQuery.of(context).size.width * 0.05),
                               child: const Icon(Icons.settings))),
                     ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: DropdownButton<String>(
+                        style: const TextStyle(
+                            color: ColorsData.textPrimary, fontSize: 20),
+                        dropdownColor: ColorsData.backgroundSecondPrimary,
+                        onChanged: (value) {
+                          setState(() {
+                            if (value != 'OWN') {
+                              dropValue = value!;
+                              context
+                                  .read<ViewRLE>()
+                                  .setOutFileExtension(value);
+                              return;
+                            }
+                            showAlertDialog(context, myController);
+                            if (myController.text != '' &&
+                                !myController.text
+                                    .contains(RegExp(r'[^a-zA-Z]'))) {
+                              dropValue = 'OWN';
+                            }
+                          });
+                        },
+                        value: dropValue,
+                        items: <String>['BMP', 'PNG', 'JPG', 'GIF', 'OWN']
+                            .map((String value) => DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                ))
+                            .toList(),
+                      ),
+                    )
                   ],
                 ),
               ));

@@ -11,7 +11,8 @@ import 'package:rle_compress/data/rle_compressor.dart';
 class ViewRLE extends ChangeNotifier {
   String pickedFile = 'example.bmp',
       outFilePath = '/storage/emulated/0/Download',
-      errorStr = 'Something went wrong';
+      errorStr = 'Something went wrong',
+      outFileExtension = 'bmp';
 
   List<HistoryCardData> history = [];
 
@@ -21,8 +22,12 @@ class ViewRLE extends ChangeNotifier {
 
   Uint8List? fileBytes;
 
-  addElementToHistory(HistoryCardData data) {
+  void addElementToHistory(HistoryCardData data) {
     history.insert(0, data);
+  }
+
+  void setOutFileExtension(String extension) {
+    outFileExtension = extension;
   }
 
   Future getFile() async {
@@ -90,7 +95,11 @@ class ViewRLE extends ChangeNotifier {
           File(outFilePath + '/out_' + pickedFile.split('.').first + '.rle')
               .writeAsBytes(fileBytes!);
         } else {
-          File(outFilePath + '/out_' + pickedFile.split('.').first + '.bmp')
+          File(outFilePath +
+                  '/out_' +
+                  pickedFile.split('.').first +
+                  '.' +
+                  outFileExtension)
               .writeAsBytes(fileBytes!);
         }
 

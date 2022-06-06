@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Container(
@@ -28,7 +29,7 @@ class HomePage extends StatelessWidget {
           Container(
               constraints: BoxConstraints.tightFor(
                   height: MediaQuery.of(context).size.height * 0.4),
-              child: Center(child: History())),
+              child: const Center(child: History())),
         ],
       ),
     );

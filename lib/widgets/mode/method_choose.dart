@@ -14,7 +14,7 @@ class MethodChoose extends StatelessWidget {
           context.read<ViewRLE>().changeCompress();
         }),
         direction: FlipDirection.VERTICAL,
-        front: CardTitle(title: 'COMPRESSION'),
-        back: CardTitle(title: 'DECOMPRESSION'));
+        front: const CardTitle(title: 'COMPRESSION'),
+        back: const CardTitle(title: 'DECOMPRESSION'));
   }
 }

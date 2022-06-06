@@ -7,7 +7,7 @@ import 'package:rle_compress/view/view_rle.dart';
 import 'history_card.dart';
 
 class History extends StatefulWidget {
-  History({Key? key}) : super(key: key);
+  const History({Key? key}) : super(key: key);
 
   @override
   State<History> createState() => _HistoryState();
