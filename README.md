@@ -1,16 +1,30 @@
-# rle_compress
+# RLE compresion app
 
-A new Flutter project.
+App using algorithm RLE to compress and decompress data.
 
-## Getting Started
+## Functionality
 
-This project is a starting point for a Flutter application.
+Avaliable features:
 
-A few resources to get you started if this is your first Flutter project:
+- compress and decompress any file to RLE extension file;
+- change directory for saving files;
+- change file extension for saving files;
+- list of history files with statistics.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Interface
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+View of main screen:
+
+<img src="https://github.com/PepperoniOnzo/readme_assets/blob/master/rle_compress/int_1.png?raw=true"/>
+
+After choosing file:
+
+<img src="https://github.com/PepperoniOnzo/readme_assets/blob/master/rle_compress/int_2.png?raw=true"/>
+
+Result of compression with statistics and histoty tiles:
+
+<img src="https://github.com/PepperoniOnzo/readme_assets/blob/master/rle_compress/int_3.png?raw=true"/>
+
+Card after changing mode:
+
+<img src="https://github.com/PepperoniOnzo/readme_assets/blob/master/rle_compress/int_4.png?raw=true"/>
